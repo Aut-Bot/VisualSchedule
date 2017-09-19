@@ -3,6 +3,11 @@
     padding-bottom: 20px;
 }
 
+.left-align-col {
+    float: left;
+    width: 33%;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -25,6 +30,7 @@
 #qrCode {
     margin: 15px;
 }
+
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
