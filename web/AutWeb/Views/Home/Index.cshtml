@@ -8,22 +8,23 @@
     ViewBag.UserName = "Bill Berry";
 }
 
-<h1>@(ViewBag.UserName)</h1>
-@for (var i = 0; i < 7; i++)
-{
-    <div class="bottom">
-        <div class="left-align-col">
-            <div class="col-header">
-                @{ DateTime.Now.DayOfWeek.ToString(); }
-            </div>
-            <div class="col-content">
-                @foreach(var tile in ViewBag.todaytiles) {
-                    <div>
-                        <img src="@(tile.Imgurl)" width="200" height="200" />
-                        <h4>@(tile.Description)</h4>
-                    </div>
-                 }
+
+<div class="container" >
+    <div class="row">
+        <div class="col-lg-3"><h1>@(ViewBag.UserName)</h1></div>
+        <div class="col-lg-6"> </div>
+        <div id="settings" class="col-lg-3 align-self-end">Settings</div>
+    </div>
+    <div id="content" class="row">
+        <div id="calendar" class="col-lg-8">
+            <div class="container">
+                <div class="row">
+                    @foreach(var day in Enum.GetValues(typeof(DayOfWeek))){
+                        <div class="col-lg-1 dayofweek">@day</div>
+                     }
+                </div>
             </div>
         </div>
+        <div id="tile_holder" class="col-lg-4">Tile Holder</div>
     </div>
-}
+</div>
