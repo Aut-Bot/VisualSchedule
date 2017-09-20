@@ -1,10 +1,15 @@
 ﻿
 @{
+
     ViewData["Title"] = "Home Page";
+    var tiles = new List<Tile>();
+    tiles.Add(new Tile("http://pixieknits.bloggnorge.com/files/2015/02/cookie-monster.jpg", "a description"));
+    ViewBag.todaytiles = tiles;
+    ViewBag.UserName = "Bill Berry";
 }
 
 <h1>@(ViewBag.UserName)</h1>
-@for (var i = 0; i < 3; i++)
+@for (var i = 0; i < 7; i++)
 {
     <div class="bottom">
         <div class="left-align-col">
@@ -14,8 +19,8 @@
             <div class="col-content">
                 @foreach(var tile in ViewBag.todaytiles) {
                     <div>
-                        <img src="@(tile.imgurl)" width="200" height="200" />
-                        <h4>@(tile.description)</h4>
+                        <img src="@(tile.Imgurl)" width="200" height="200" />
+                        <h4>@(tile.Description)</h4>
                     </div>
                  }
             </div>
