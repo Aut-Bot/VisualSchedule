@@ -3,9 +3,19 @@
     padding-bottom: 20px;
 }
 
-.left-align-col {
-    float: left;
-    width: 33%;
+#settings {
+    vertical-align:bottom;
+}
+.dayofweek{
+    text-align:center;
+}
+#content {
+}
+
+#calendar {
+}
+
+#tile holder {
 }
 
 /* Wrapping element */
