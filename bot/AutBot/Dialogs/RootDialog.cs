@@ -41,7 +41,7 @@
             //context.Wait(this.MessageReceived);
             name = string.Empty;
             schedule = string.Empty;
-            string starttime = string.Empty;
+            //string starttime = string.Empty;
             string endtime = string.Empty;
             foreach (var entity in result.Entities)
             {
@@ -58,7 +58,7 @@
                             foreach (var item in a)
                             {
                                 JValue jvaluestartTime = (JValue)item["value"];
-                                starttime = jvaluestartTime.ToString();
+                                schedule = jvaluestartTime.ToString();
                                 
                             }
                                                         
@@ -73,7 +73,7 @@
                             {
                                 JValue jvaluestartTime = (JValue)item["start"];
                                 JValue jvalueendTime = (JValue)item["end"];
-                                 starttime = jvaluestartTime.ToString();
+                                schedule = jvaluestartTime.ToString();
                                  endtime = jvalueendTime.ToString();
                             }
                                               
@@ -82,12 +82,13 @@
                         break;
                 }
             }
-            this.ShowOptions(context,name,starttime,endtime);
+            this.ShowOptions(context,name, schedule, endtime);
 
         }
         private void ShowOptions(IDialogContext context, string name, string starttime, string endtime)
         {
             PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { Yes, No }, "Do you want to add schedule named "+name+" for start time: "+starttime+ "  end time: "+endtime, "Not a valid option", 3);
+            
         }
         private async Task OnOptionSelected(IDialogContext context, IAwaitable<string> result)
         {
@@ -98,7 +99,7 @@
                 switch (optionSelected)
                 {
                     case Yes:
-                        context.Call(new AddTileDialog(), this.ResumeAfterOptionDialog);
+                        context.Call(new AddTileDialog(name, schedule), this.ResumeAfterOptionDialog);
                         break;
 
                     case No:
