@@ -1,0 +1,70 @@
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script>
+// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+
+        function searchimage() {
+
+            var baseUri = "";
+            var fullUri = "";
+            var count = 0;
+            var max = 2;
+            var query = $("#query").val();
+            var allThumbs = "";
+
+            baseUri = "https://api.cognitive.microsoft.com/bing/v5.0/images/search?Ocp-Apim-Subscription-Key=KEY&q=";
+            fullUri = baseUri + query;
+
+            console.log("fullUri=" + fullUri);
+
+            $.ajax({
+                beforeSend: function (request) {
+                    request.setRequestHeader("Ocp-Apim-Subscription-Key", "KEY")
+                },
+                dataType: "json",
+                url: fullUri,
+                type: "GET",
+                success: function (data) {
+                    //do stuff
+
+                    console.log(data);
+                    console.log(data.readlink);
+                    $.each(data.value, function (entryIndex, entry) {
+                        if (count <= max) {
+                            var thumbURL = this.thumbnailUrl;
+                            var linktoPic = this.contentUrl;
+                            allThumbs += "<img src='" + thumbURL + "'>" + "<br />";
+                            console.log(thumbURL);
+                            count++;
+                        }
+                    });
+                    //console.log(allThumbs);
+                    $("#resultDiv").html(allThumbs);
+                },
+                error: function () { }
+
+            });
+         }
+           
+    </script>
+
+</head>
+<body>
+<div class="row">
+    <h1>Image Search</h1>
+    <p class="lead">Please input your query in the search box.</p>
+    Term: <input type="text" id="query"><br /><br />
+</div>
+
+<input type="button" value="Search" onclick="searchimage()">
+Result: 
+<div id="resultDiv">?</div>
+
+
+
+</body>
+</html>  

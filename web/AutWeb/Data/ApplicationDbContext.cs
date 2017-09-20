@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AutWeb.Models;
+using AutWeb.Models.AutModels;
 
 namespace AutWeb.Data
 {
@@ -22,5 +23,8 @@ namespace AutWeb.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+
+        public DbSet<CalendarItem> CalendarItems { get; set; }
     }
 }
