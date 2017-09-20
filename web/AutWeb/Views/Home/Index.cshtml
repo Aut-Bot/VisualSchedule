@@ -23,6 +23,15 @@
                         <div class="col-lg-1 dayofweek">@day</div>
                      }
                 </div>
+                @foreach(var i in Enumerable.Range(0, 3)){
+                    <div class="row">
+                        @foreach(var x in Enumerable.Range(0, 7))
+                        {
+                            <div class="dropzone grid-snap col-lg-1 schtarget">A</div>
+                        }
+                    </div>
+
+                }
             </div>
         </div>
         <div id="tile_holder" class="col-lg-4">Tile Holder</div>
