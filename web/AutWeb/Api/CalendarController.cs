@@ -82,6 +82,7 @@ namespace AutWeb.Api
             return NoContent();
         }
 
+
         // POST: api/Calendar
         [HttpPost]
         public async Task<IActionResult> PostCalendarItem([FromBody] CalendarItem calendarItem)
@@ -96,7 +97,7 @@ namespace AutWeb.Api
 
             return CreatedAtAction("GetCalendarItem", new { id = calendarItem.Id }, calendarItem);
         }
-
+        
         // DELETE: api/Calendar/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCalendarItem([FromRoute] int id)
