@@ -22,6 +22,7 @@ namespace AutBot
     {   
         string desccription { get; set; }
         string timeslot { get; set; }
+        
         public AddTileDialog(string name, string timeslot)
         {
             this.desccription = name;
@@ -69,12 +70,13 @@ namespace AutBot
             try
             {
                 var message = await result;
+                byte[] stream = (byte[])message;
                 //Call the API
                 using (var client = new HttpClient())
                 {
-                    Schedule p = new Schedule { timeSlot = this.timeslot, description = this.desccription };
+                    Schedule p = new Schedule { timeSlot = this.timeslot, description = this.desccription, ItemImage = stream };
                     client.BaseAddress = new Uri("http://visualscheduler.azurewebsites.net");
-                    var response = client.PostAsJsonAsync("api/Calendar",p).Result;
+                    var response = client.PostAsJsonAsync("api/CalendarBot",p).Result;
 
                 }
 
