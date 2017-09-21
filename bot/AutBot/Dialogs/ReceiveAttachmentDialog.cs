@@ -12,6 +12,7 @@ namespace AutBot
     [Serializable]
     public class ReceiveAttachmentDialog : IDialog<object>
     {
+        string blobURL = string.Empty;
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(this.MessageReceivedAsync);
@@ -40,7 +41,8 @@ namespace AutBot
 
                     await context.PostAsync($"Attachment of {attachment.ContentType} type and size of {contentLenghtBytes} bytes received.");
 
-                    //call API to send data to 
+                    //call API to send data to and get back the URL
+                    blobURL = "www.bing.com";
                 }
             }
             else
@@ -49,7 +51,7 @@ namespace AutBot
             }
 
             //context.Wait(this.MessageReceivedAsync);
-            context.Done<object>(null);
+            context.Done<string>(blobURL);
         }
 
 

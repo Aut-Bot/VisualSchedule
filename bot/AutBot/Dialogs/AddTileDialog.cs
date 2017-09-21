@@ -9,12 +9,25 @@ using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json.Linq;
+using System.Net;
+using System.Collections.Specialized;
+using System.Net.Http;
+
 
 namespace AutBot
-{
+{   
+    
     [Serializable]
     public class AddTileDialog :IDialog<object>
-    {
+    {   
+        string desccription { get; set; }
+        string timeslot { get; set; }
+        public AddTileDialog(string name, string timeslot)
+        {
+            this.desccription = name;
+            this.timeslot = timeslot;
+
+        }
         bool isSearch = false;
        
         public async Task StartAsync(IDialogContext context)
@@ -56,6 +69,15 @@ namespace AutBot
             try
             {
                 var message = await result;
+                //Call the API
+                using (var client = new HttpClient())
+                {
+                    Schedule p = new Schedule { timeSlot = this.timeslot, description = this.desccription };
+                    client.BaseAddress = new Uri("http://visualscheduler.azurewebsites.net");
+                    var response = client.PostAsJsonAsync("api/Calendar",p).Result;
+
+                }
+
             }
             catch (Exception ex)
             {
