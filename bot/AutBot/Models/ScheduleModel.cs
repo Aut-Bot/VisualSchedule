@@ -9,5 +9,6 @@ namespace AutBot
     {
         public string timeSlot { get; set; }
         public string description { get; set; }
+        public byte[] ItemImage { get; set; }
     }
 }
