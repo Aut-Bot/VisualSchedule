@@ -20,6 +20,7 @@ namespace AutBot
 
         public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
+            byte[] dataStream = null;
             var message = await argument;
 
             if (message.Attachments != null && message.Attachments.Any())
@@ -34,24 +35,24 @@ namespace AutBot
                         var token = await new MicrosoftAppCredentials().GetTokenAsync();
                         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     }
-
                     var responseMessage = await httpClient.GetAsync(attachment.ContentUrl);
-
+                    using (HttpContent content = responseMessage.Content)
+                    {
+                        dataStream = await content.ReadAsByteArrayAsync();
+                    }
                     var contentLenghtBytes = responseMessage.Content.Headers.ContentLength;
-
-                    await context.PostAsync($"Attachment of {attachment.ContentType} type and size of {contentLenghtBytes} bytes received.");
+                    await context.PostAsync($"Image size of {contentLenghtBytes} bytes received and uploaded");
 
                     //call API to send data to and get back the URL
-                    blobURL = "www.bing.com";
+                    //blobURL = "www.bing.com";
                 }
             }
             else
             {
                 await context.PostAsync("Hi there! I'm a bot created to show you how I can receive message attachments, but no attachment was sent to me. Please, try again sending a new message including an attachment.");
             }
-
             //context.Wait(this.MessageReceivedAsync);
-            context.Done<string>(blobURL);
+            context.Done<object>(dataStream);
         }
 
 
