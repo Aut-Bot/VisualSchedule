@@ -9,11 +9,11 @@ namespace AutWeb.Models
     {
         public Tile(string imgurl, string description)
         {
-            Imgurl = imgurl;
+            ImgUrl = imgurl;
             Description = description;
 
         }
-        public string Imgurl { get; }
+        public string ImgUrl { get; }
         public string Description { get; }
     }
 }

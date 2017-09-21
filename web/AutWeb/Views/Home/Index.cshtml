@@ -3,8 +3,8 @@
 
     ViewData["Title"] = "Home Page";
     var tiles = new List<Tile>();
-    tiles.Add(new Tile("http://pixieknits.bloggnorge.com/files/2015/02/cookie-monster.jpg", "a description"));
-    ViewBag.todaytiles = tiles;
+    //tiles.Add(new Tile("http://pixieknits.bloggnorge.com/files/2015/02/cookie-monster.jpg", "a description"));
+    //ViewBag.todaytiles = tiles;
     ViewBag.UserName = "Bill Berry";
 }
 
@@ -47,7 +47,10 @@
                     <div id="tile_holder" class="col-lg-4">
                         @foreach (var tile in ViewBag.todaytiles)
                         {
-                            <div class="tile draggable drag-drop grid-snap">foo</div>
+                            <div class="tile draggable drag-drop grid-snap">
+                                <img src="@(tile.ImgUrl)" />
+                                <p>@tile.Description</p>
+                            </div>
                         }
                     </div>
                 </div>

@@ -5,13 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutWeb.Models;
+using AutWeb.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        ApplicationDbContext _context;
+        public HomeController(ApplicationDbContext context)
         {
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var tiles = 
+                (await _context.CalendarItems.ToListAsync())
+                .Select(x => new Tile(x.ImageUrl, x.Description));
+
+            ViewBag.todayTiles = tiles;
             return View();
         }
 
