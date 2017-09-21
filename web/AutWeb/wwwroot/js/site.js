@@ -6,9 +6,31 @@
 
     interact.maxInteractions(Infinity);
 
+    var schtargets = Array.from(document.getElementsByClassName('schtarget'))
+    var targets = schtargets.map(function (x) {
+        var coords = x.getBoundingClientRect();
+        return { x: coords.left+45, y: coords.bottom-45}
+    });
+
     // setup draggable elements.
     interact('.draggable')
-        .draggable({ max: Infinity })
+        .draggable({
+            snap: {
+                //mode: 'anchor',
+                targets: targets,
+                //anchors: [],
+                //range: Infinity,
+                elementOrigin: { x: 0, y: 0 },
+                endOnly: true
+            },
+            intertia: true,
+            restrict: {
+                restriction: document.getElementById('calendar'),
+                endOnly: true,
+                elementRect: { top: 0, left: 0, bottom: 0, right: 0 }
+            },
+            max: Infinity
+        })
         .on('dragstart', function (event) {
             event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 0;
             event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 0;
@@ -62,7 +84,7 @@
                 // change style if it was previously not active
                 if (active === 0) {
                     addClass(event.target, '-drop-possible');
-                    event.target.textContent = 'Drop me here!';
+                    //event.target.textContent = 'Drop me here!';
                 }
 
                 event.target.setAttribute('active', active + 1);
@@ -74,22 +96,22 @@
                 // but will no longer be active
                 if (active === 1) {
                     removeClass(event.target, '-drop-possible');
-                    event.target.textContent = 'Dropzone';
+                    //event.target.textContent = 'Dropzone';
                 }
 
                 event.target.setAttribute('active', active - 1);
             })
             .on('dragenter', function (event) {
                 addClass(event.target, '-drop-over');
-                event.relatedTarget.textContent = 'I\'m in';
+                //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
-                event.relatedTarget.textContent = 'Drag me…';
+                //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
                 removeClass(event.target, '-drop-over');
-                event.relatedTarget.textContent = 'Dropped';
+                //event.relatedTarget.textContent = 'Dropped';
             });
     }
 

@@ -6,8 +6,11 @@
 #settings {
     vertical-align:bottom;
 }
-.dayofweek{
-    text-align:center;
+.dayofweek {
+    text-align: center;
+    width: 100px;
+    margin: 1px;
+    padding: 10px;
 }
 
 #content {
@@ -16,7 +19,10 @@
 #calendar {
 }
 
-#tile holder {
+.tile {
+    height: 90px;
+    width: 90px;
+    background-color:antiquewhite;
 }
 
 /*Snapping Css*/
@@ -45,13 +51,8 @@
 }
 
 #dropzone-outer {
-    height: 140px;
-    width: 140px;
-}
-
-#dropzone-inner {
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
 }
 
 .drop-active {
@@ -66,7 +67,6 @@
 
 .drag-drop {
     display: inline-block;
-    min-width: 40px;
     padding: 2em 0.5em;
     color: #fff;
     background-color: #29e;
@@ -76,10 +76,10 @@
     transition: background-color 0.3s;
 }
 
-    .drag-drop.can-drop {
-        color: #000;
-        background-color: #4e4;
-    }
+.drag-drop.can-drop {
+    color: #000;
+    background-color: #4e4;
+}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */

@@ -16,18 +16,18 @@
         <div id="settings" class="col-lg-3 align-self-end">Settings</div>
     </div>
     <div id="content" class="row">
-        <div id="calendar" class="col-lg-10">
+        <div id="calendar" class="col-lg-8">
             <div class="container">
                 <div class="row">
                     @foreach(var day in Enum.GetValues(typeof(DayOfWeek))){
-                        <div class="col-lg-1 dayofweek">@day</div>
+                        <div class="col-lg-1 dayofweek ">@day</div>
                      }
                 </div>
                 @foreach(var i in Enumerable.Range(0, 3)){
                     <div class="row">
                         @foreach(var x in Enumerable.Range(0, 7))
                         {
-                            <div id="dropzone-outer" class="dropzone col-sm-1  schtarget">
+                            <div id="dropzone-outer" class="dropzone col-sm-1 schtarget">
                                 &nbsp;
                             </div>
                         }
@@ -36,8 +36,23 @@
                 }
             </div>
         </div>
-        <div id="tile_holder" class="col-lg-4">
-            <div style="height:100px; width:100px; background-color:aquamarine;" class="draggable drag-drop grid-snap">foo</div>
+        <div class="col-lg-4">
+            <div class="container">
+                <div class="row">
+                    <div id="tile_holder" class="col-md-4">
+                        <h4>Activities</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="tile_holder" class="col-lg-4">
+                        @foreach (var tile in ViewBag.todaytiles)
+                        {
+                            <div class="tile draggable drag-drop grid-snap">foo</div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
 </div>
