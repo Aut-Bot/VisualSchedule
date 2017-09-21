@@ -42,7 +42,16 @@
     margin: 1px;
     padding: 10px;
     transition: background-color 0.3s;
-    height: 80px;
+}
+
+#dropzone-outer {
+    height: 140px;
+    width: 140px;
+}
+
+#dropzone-inner {
+    height: 120px;
+    width: 120px;
 }
 
 .drop-active {
@@ -71,6 +80,7 @@
         color: #000;
         background-color: #4e4;
     }
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -93,7 +103,6 @@
 #qrCode {
     margin: 15px;
 }
-
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
